@@ -1,13 +1,20 @@
 import express from 'express'
 import handlebars from 'express-handlebars'
 import indexRouter from './routes/index.routes.js'
-import path from 'path'
+import morgan from 'morgan'
 
 const app = express()
 
-app.set('views', './src/views')
+app.use(express.json())
+
+app.set('views', './src/views') // esto seria el layouts dir
 app.engine("handlebars", handlebars.engine());
 app.set("view engine", "handlebars");
+
+//middlewares 
+
+app.use(morgan('dev')) // te dice la respuesta del servidor
+app.use(express.urlencoded({ extended: false }))
 
 app.use(indexRouter)
 
