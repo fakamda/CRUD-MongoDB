@@ -1,32 +1,20 @@
 import  { Router } from "express"
-import Task from "../models/Task.js"
+import {renderTasks, createTask, editTask, updateTask, deleteTask, taskToggleDone} from '../controllers/task.controller.js'
 
 const router = Router()
 
-router.get("/", async (req, res) => {
-    const tasks = await Task.find().lean() // devuelve una lista de objetos de js en ves de mongo db
+//GET
+router.get("/", renderTasks)
+//POST
+router.post('/tasks/add', createTask)
+//EDIT 
+router.get("/tasks/:id/edit", editTask)
 
-    res.render("index", { tasks : tasks }) // mostramos el objeto que se llama tareas y listamos el array de tareas de la DB
-})
-
-router.post('/tasks/add', async (req, res) => {
-    try{
-        const task = Task(req.body)
-        await task.save()
-
-        res.redirect('/') // con esto redireccionamos a la pagina principal
-    } catch (error) {
-        console.log(error)
-    }
-})
-
-router.get("/about", (req, res) => {
-    res.render("about")
-})
-
-router.get("/edit", (req, res) => {
-    res.render("edit")
-})
+router.post('/tasks/:id/edit', updateTask)
+//DELETE 
+router.get('/tasks/:id/delete', deleteTask)
+//GET DONE 
+router.get('/tasks/:id/toggleDone', taskToggleDone)
 
 
 export default router 
