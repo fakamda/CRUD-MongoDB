@@ -16,6 +16,11 @@ app.set("view engine", "handlebars");
 app.use(morgan('dev')) // te dice la respuesta del servidor
 app.use(express.urlencoded({ extended: false }))
 
+// ROUTES
+
 app.use(indexRouter)
+// STATIC FILES
+
+app.use(express.static('./src/public'))
 
 export default app

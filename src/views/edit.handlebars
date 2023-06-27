@@ -1,9 +1,14 @@
-<form action="/tasks/{{task._id}}/edit" method="POST">
-
-    <input type="text" name="title" placeholder="Title" value="{{task.title}}">
-
-    <textarea name="description" rows="3" placeholder="Add a description">{{task.description}}</textarea>
-
-    <button>Update</button>
-
-</form>
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 offset-md-3">
+            <div class="card card-body bg-dark p-4 text-white">
+                <h2>Update Tasks</h2>
+                <form action="/tasks/{{task._id}}/edit" method="POST">
+                    <input type="text" name="title" placeholder="Title" value="{{task.title}}" class="form-control rounded-2 bg-dark text-white mb-4">
+                    <textarea name="description" rows="3" placeholder="Add a description" class="form-control rounded-2 bg-dark text-white mb-4">{{task.description}}</textarea>
+                    <button class="btn btn-primary">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
